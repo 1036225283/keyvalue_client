@@ -93,17 +93,6 @@ public class KeyValueClient {
         return null;
     }
 
-    public static void main(String[] args) throws IOException {
-        KeyValueClient client = new KeyValueClient("www.1036225283.com", 88);
-
-        for (int i = 0; i < 1000; i++) {
-            long start = System.nanoTime();
-            String value = client.get("" + i);
-
-            long end = System.nanoTime();
-            System.out.println((end - start) / 1000 + " " + i + " = " + value);
-        }
-    }
 
     public KeyValueClient(String ip, int port) throws IOException {
         // TODO Auto-generated constructor stub
