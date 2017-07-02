@@ -10,9 +10,11 @@ public class UtilKeyValue {
     //client
     // 针对key-value的序列化方案
     // bs[0] = 1 //set key value
-    // bs[1] = 2 // get key
-    // bs[2] = 3 // result
-    // bs[3] = 4 // remove key
+    // bs[0] = 2 // get key
+    // bs[0] = 3 // result
+    // bs[0] = 4 // remove key
+    // bs[0] = 5 // error
+    // bs[0] = 6 // ok
 
     //server
     //返回结果序列化
