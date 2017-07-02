@@ -1,15 +1,14 @@
 package _1036225283.com.keyValue.client;
 
-import java.io.IOException;
-
 /**
  * key value client test
  * Created by xws on 7/1/17.
  */
 public class KeyValueTest {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 
+        set();
 
     }
 
@@ -36,7 +35,7 @@ public class KeyValueTest {
             long start = System.nanoTime();
             client.set("我爱你第" + i + "次", "你爱我" + i + "次");
             long end = System.nanoTime();
-            System.out.println((end - start) / 1000 + " " + i);
+            System.out.println("微秒"+(end - start) / 1000);
         }
     }
 }
