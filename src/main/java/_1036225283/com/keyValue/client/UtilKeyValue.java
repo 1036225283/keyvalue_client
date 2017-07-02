@@ -22,7 +22,7 @@ public class UtilKeyValue {
 
 
     // 客户端封装set请求(bs[1]+bs[2] == key.lenth)
-    public byte[] set(String key, String value) {
+    public static byte[] set(String key, String value) {
         int nKeyLength = key.getBytes().length;
         String total = "123" + key + value;
         byte[] bs = total.getBytes();
@@ -33,7 +33,7 @@ public class UtilKeyValue {
     }
 
     // 客户端封装get请求
-    public byte[] get(String key) {
+    public static byte[] get(String key) {
         String total = 1 + key;
         byte[] bs = total.getBytes();
         bs[0] = 1;
@@ -41,7 +41,7 @@ public class UtilKeyValue {
     }
 
     // 客户端封装remove请求
-    public byte[] remove(String key) {
+    public static byte[] remove(String key) {
         String total = 1 + key;
         byte[] bs = total.getBytes();
         bs[0] = 4;
@@ -50,7 +50,7 @@ public class UtilKeyValue {
 
 
     //服务端解析get请求
-    public KvNode set(byte[] bs) {
+    public static KvNode set(byte[] bs) {
         int high = bs[1] << 8;
         int low = bs[2];
         int nKeyLength = high + low;
@@ -63,14 +63,14 @@ public class UtilKeyValue {
     }
 
     //服务端解析get请求
-    public String get(byte[] bs) {
+    public static String get(byte[] bs) {
         String key = new String(bs, 1, bs.length - 1);
         return key;
     }
 
 
     //服务端解析remove请求
-    public String remove(byte[] bs) {
+    public static String remove(byte[] bs) {
         String key = new String(bs, 1, bs.length - 1);
         return key;
     }
