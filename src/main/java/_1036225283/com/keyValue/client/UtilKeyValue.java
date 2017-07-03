@@ -9,7 +9,8 @@ public class UtilKeyValue {
 
     //client
     // 针对key-value的序列化方案
-    // bs[0] = 1 //set key value
+    // bs[0] = 0 // default 404
+    // bs[0] = 1 // set key value
     // bs[0] = 2 // get key
     // bs[0] = 3 // result
     // bs[0] = 4 // remove key

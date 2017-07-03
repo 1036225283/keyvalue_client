@@ -16,7 +16,7 @@ public class KeyValueTest {
     // test get
     public static void get() throws Exception {
 
-        KeyValueClient client = new KeyValueClient("localhost", 8888);
+        KeyValueClientOld client = new KeyValueClientOld("localhost", 8888);
 
         for (int i = 0; i < 1000; i++) {
             long start = System.nanoTime();
@@ -29,7 +29,7 @@ public class KeyValueTest {
 
     //test set
     public static void set() throws Exception {
-        KeyValueClient client = new KeyValueClient("localhost", 8888);
+        KeyValueClientOld client = new KeyValueClientOld("localhost", 8888);
 
         for (int i = 0; i < 1000; i++) {
             long start = System.nanoTime();

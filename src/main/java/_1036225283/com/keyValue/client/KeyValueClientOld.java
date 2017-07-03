@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * key-value系统的客户端，单线程，
  */
-public class KeyValueClient {
+public class KeyValueClientOld {
 
 
     private Socket socket;
@@ -18,17 +18,17 @@ public class KeyValueClient {
     private int port;
     private byte[] bytes = new byte[1024 * 8];
 
-    public KeyValueClient setIp(String ip) {
+    public KeyValueClientOld setIp(String ip) {
         this.ip = ip;
         return this;
     }
 
-    public KeyValueClient setPort(int port) {
+    public KeyValueClientOld setPort(int port) {
         this.port = port;
         return this;
     }
 
-    public KeyValueClient connection() {
+    public KeyValueClientOld connection() {
         try {
             InetAddress inetAddress = InetAddress.getByName(ip);
             socket = new Socket(inetAddress.getHostAddress(), port);
@@ -49,8 +49,8 @@ public class KeyValueClient {
 
 
     public void set(String key, String value) {
-        byte[] writeBytes = UtilKeyValue.set(key, value);
-        this.write(writeBytes);
+        String writeString = UtilProtocol.write("key-value/set", key + "=" + value, ip, port);
+        this.write(writeString.getBytes());
         String message = this.read();
         Map<String, String> map = UtilProtocol.read(message);
         System.out.println(map);
@@ -94,7 +94,7 @@ public class KeyValueClient {
     }
 
 
-    public KeyValueClient(String ip, int port) throws IOException {
+    public KeyValueClientOld(String ip, int port) throws IOException {
         // TODO Auto-generated constructor stub
         this.setIp(ip).setPort(port).connection();
     }
