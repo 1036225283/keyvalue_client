@@ -1,6 +1,8 @@
 package _1036225283.com.keyValue.client;
 
 
+import _1036225283.com.keyValue.client.old.UtilProtocol;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetAddress;
@@ -52,19 +54,14 @@ public class KeyValueClient {
         byte[] writeBytes = UtilKeyValue.set(key, value);
         this.write(writeBytes);
         String message = this.read();
-        Map<String, String> map = UtilProtocol.read(message);
-        System.out.println(map);
+        System.out.println(message);
     }
 
     public String get(String key) {
-
-        String writeString = UtilProtocol.write("/key-value/get", "key=" + UtilProtocol.encode(key), ip, port);
-        this.write(writeString.getBytes());
+        byte[] writeBytes = UtilKeyValue.get(key);
+        this.write(writeBytes);
         String message = this.read();
-        Map<String, String> map = UtilProtocol.read(message);
-        String param = map.get("");
-        Map<String, String> map1 = null;
-        return map1.get("value");
+        return message;
 
     }
 
@@ -85,8 +82,15 @@ public class KeyValueClient {
 
     private String read() {
         try {
-            int size = socket.getInputStream().read(bytes);
-            return new String(bytes, 0, size);
+            int length = socket.getInputStream().read(bytes);
+            if (bytes[0] == 6) {
+                System.out.println("this is ok");
+                return UtilKeyValue.get(bytes, length);
+
+            } else {
+                System.out.println("this is error");
+                throw new RuntimeException("read error");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

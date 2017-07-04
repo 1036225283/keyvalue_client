@@ -9,7 +9,7 @@ public class UtilKeyValue {
 
     //client
     // 针对key-value的序列化方案
-    // bs[0] = 0 // default 404
+    // bs[0] = 0 // default protocol error
     // bs[0] = 1 // set key value
     // bs[0] = 2 // get key
     // bs[0] = 3 // result
@@ -53,12 +53,12 @@ public class UtilKeyValue {
 
 
     //服务端解析get请求
-    public static KvNode set(byte[] bs) {
+    public static KvNode set(byte[] bs, int length) {
         int high = bs[1] << 8;
         int low = bs[2];
         int nKeyLength = high + low;
         String key = new String(bs, 3, nKeyLength);
-        String value = new String(bs, nKeyLength, bs.length - 1);
+        String value = new String(bs, 3 + nKeyLength, length - 3 - nKeyLength);
         KvNode node = new KvNode();
         node.setKey(key);
         node.setValue(value);
@@ -66,8 +66,8 @@ public class UtilKeyValue {
     }
 
     //服务端解析get请求
-    public static String get(byte[] bs) {
-        String key = new String(bs, 1, bs.length - 1);
+    public static String get(byte[] bs, int length) {
+        String key = new String(bs, 1, length);
         return key;
     }
 
@@ -96,20 +96,11 @@ public class UtilKeyValue {
 
     public static void main(String[] args) {
         UtilKeyValue test = new UtilKeyValue();
-        byte[] bs = test.get("123");
-
-        System.out.println(bytesToHexString(bs));
-
+        byte[] bs = test.set("123", "1234");
         System.out.println(bs.length);
-        System.out.println(new String(bs, 1, bs.length - 1));
-
-        bs = test.remove("2345");
-        System.out.println(new String(bs, 1, bs.length - 1));
-
-        int xws = 258;
-        System.out.println(xws / 256);
-        System.out.println(xws % 256);
-
+        KvNode node = test.set(bs, bs.length);
+        System.out.println(node.getKey());
+        System.out.println(node.getValue());
     }
 
 }
