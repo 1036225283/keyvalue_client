@@ -1,7 +1,5 @@
 package _1036225283.com.keyValue.client;
 
-import _1036225283.com.keyValue.client.old.KeyValueClientOld;
-
 /**
  * key value client test
  * Created by xws on 7/1/17.
@@ -11,23 +9,46 @@ public class KeyValueTest {
     public static void main(String[] args) throws Exception {
 
 //        set();
+//        get();
+        getTotal();
 //        setOne();
-        getOne();
+//        getOne();
+//        test();
         System.out.println("this is end");
     }
 
 
+    public static void test() {
+        byte[] bs = UtilKeyValue.get(Operation.GET, "12");
+        System.out.println("bs.length = " + bs.length);
+        String key = UtilKeyValue.get(bs, bs.length);
+        System.out.println("key = " + key);
+    }
+
+    public static void getTotal() throws Exception {
+
+        KeyValueClient client = new KeyValueClient("localhost", 8888);
+        long start = System.nanoTime();
+        for (int i = 0; i < 10000; i++) {
+            String value = client.get("我爱你第" + i + "次啊");
+        }
+
+        long end = System.nanoTime();
+        System.out.println((end - start) / 1000);
+
+    }
+
     // test get
     public static void get() throws Exception {
 
-        KeyValueClientOld client = new KeyValueClientOld("localhost", 8888);
+        KeyValueClient client = new KeyValueClient("localhost", 8888);
 
         for (int i = 0; i < 1000; i++) {
             long start = System.nanoTime();
             String value = client.get("我爱你第" + i + "次啊");
 
             long end = System.nanoTime();
-            System.out.println((end - start) / 1000 + " " + i + " = " + value);
+            System.out.println((end - start) / 1000 + " = " + value);
         }
     }
 
@@ -36,7 +57,7 @@ public class KeyValueTest {
     public static void set() throws Exception {
         KeyValueClient client = new KeyValueClient("localhost", 8888);
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10000; i++) {
             long start = System.nanoTime();
             client.set("我爱你第" + i + "次啊", "你爱我" + i + "次");
             long end = System.nanoTime();

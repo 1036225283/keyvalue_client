@@ -9,13 +9,7 @@ public class UtilKeyValue {
 
     //client
     // 针对key-value的序列化方案
-    // bs[0] = 0 // default protocol error
-    // bs[0] = 1 // set key value
-    // bs[0] = 2 // get key
-    // bs[0] = 3 // result
-    // bs[0] = 4 // remove key
-    // bs[0] = 5 // error
-    // bs[0] = 6 // ok
+
 
     //server
     //返回结果序列化
@@ -36,10 +30,10 @@ public class UtilKeyValue {
     }
 
     // 客户端封装get请求
-    public static byte[] get(String key) {
+    public static byte[] get(byte operation, String key) {
         String total = 1 + key;
         byte[] bs = total.getBytes();
-        bs[0] = 1;
+        bs[0] = operation;
         return bs;
     }
 
@@ -67,7 +61,7 @@ public class UtilKeyValue {
 
     //服务端解析get请求
     public static String get(byte[] bs, int length) {
-        String key = new String(bs, 1, length);
+        String key = new String(bs, 1, length - 1);
         return key;
     }
 

@@ -1,13 +1,10 @@
 package _1036225283.com.keyValue.client;
 
 
-import _1036225283.com.keyValue.client.old.UtilProtocol;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.Map;
 
 /**
  * key-value系统的客户端，单线程，
@@ -58,7 +55,7 @@ public class KeyValueClient {
     }
 
     public String get(String key) {
-        byte[] writeBytes = UtilKeyValue.get(key);
+        byte[] writeBytes = UtilKeyValue.get(Operation.GET, key);
         this.write(writeBytes);
         String message = this.read();
         return message;
@@ -84,11 +81,8 @@ public class KeyValueClient {
         try {
             int length = socket.getInputStream().read(bytes);
             if (bytes[0] == 6) {
-                System.out.println("this is ok");
                 return UtilKeyValue.get(bytes, length);
-
             } else {
-                System.out.println("this is error");
                 throw new RuntimeException("read error");
             }
         } catch (Exception e) {
