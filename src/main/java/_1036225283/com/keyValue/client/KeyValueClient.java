@@ -50,8 +50,7 @@ public class KeyValueClient {
     public void set(String key, String value) {
         byte[] writeBytes = UtilKeyValue.set(key, value);
         this.write(writeBytes);
-        String message = this.read();
-        System.out.println(message);
+        this.read();
     }
 
     public String get(String key) {
