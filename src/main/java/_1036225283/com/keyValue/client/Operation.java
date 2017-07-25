@@ -16,6 +16,7 @@ public class Operation {
     public static byte DEFAULT = 0;
     public static byte SET = 1;
     public static byte GET = 2;
+    public static byte PASS = 3;
     public static byte REMOVE = 4;
     public static byte ERROR = 5;
     public static byte SUCCESS = 6;

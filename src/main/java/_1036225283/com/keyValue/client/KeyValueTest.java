@@ -12,8 +12,8 @@ public class KeyValueTest {
 
 //        set();
 //        get();
-        getTotal();
-//        setOne();
+//        getTotal();
+        setOne();
 //        getOne();
 //        test();
         System.out.println("this is end");
