@@ -61,6 +61,12 @@ public class KeyValueClient {
 
     }
 
+    public void auth(String password) {
+        byte[] writeBytes = UtilKeyValue.auth(password);
+        write(writeBytes);
+        read();
+    }
+
     public void remove(String key) {
 
     }
@@ -82,6 +88,7 @@ public class KeyValueClient {
             if (bytes[0] == 6) {
                 return UtilKeyValue.get(bytes, length);
             } else {
+                socket.close();
                 throw new RuntimeException("read error");
             }
         } catch (Exception e) {

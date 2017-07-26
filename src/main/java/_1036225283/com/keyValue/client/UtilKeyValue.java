@@ -1,5 +1,7 @@
 package _1036225283.com.keyValue.client;
 
+import com.nitian.util.encrypt.UtilRSA;
+
 /**
  * key value util
  * Created by 1036225283 on 2016/11/30.
@@ -46,6 +48,13 @@ public class UtilKeyValue {
     }
 
 
+    public static byte[] auth(String password) {
+        UtilRSA rsa = new UtilRSA();
+        rsa.publicKey("/software/xws.publicKey");
+        return rsa.publicKeyEncode(password.getBytes());
+    }
+
+
     //服务端解析get请求
     public static KvNode set(byte[] bs, int length) {
         int high = bs[1] << 8;
@@ -64,7 +73,6 @@ public class UtilKeyValue {
         String key = new String(bs, 1, length - 1);
         return key;
     }
-
 
     //服务端解析remove请求
     public static String remove(byte[] bs) {
