@@ -82,6 +82,7 @@ public class KeyValueTest {
     //test set
     public static void setOne() throws Exception {
         KeyValueClient client = new KeyValueClient("localhost", port);
+        client.auth("xwsKeyValue@#$");
         long start = System.nanoTime();
         client.set("我爱你第1次啊", "你爱我1次");
         long end = System.nanoTime();

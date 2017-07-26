@@ -85,11 +85,16 @@ public class KeyValueClient {
     private String read() {
         try {
             int length = socket.getInputStream().read(bytes);
-            if (bytes[0] == 6) {
+            if (bytes[0] == Operation.SUCCESS) {
                 return UtilKeyValue.get(bytes, length);
-            } else {
+            } else if (bytes[0] == Operation.ERROR) {
                 socket.close();
-                throw new RuntimeException("read error");
+                String error = new String(bytes, 1, length);
+                Log.info(error, this);
+                throw new RuntimeException(error);
+            } else {
+                Log.info("ERROR WHEN READ DATA FROM SERVER", this);
+                throw new RuntimeException("ERROR WHEN READ DATA FROM SERVER");
             }
         } catch (Exception e) {
             e.printStackTrace();
