@@ -1,9 +1,8 @@
 package _1036225283.com.keyValue.client;
 
 
-import java.io.IOException;
 import java.io.OutputStream;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 /**
@@ -29,8 +28,14 @@ public class KeyValueClient {
 
     public KeyValueClient connection() {
         try {
-            InetAddress inetAddress = InetAddress.getByName(ip);
-            socket = new Socket(inetAddress.getHostAddress(), port);
+            InetSocketAddress inetSocketAddress = new InetSocketAddress(ip, port);
+            socket = new Socket();
+            socket.setSoLinger(true, 0);
+            socket.setSendBufferSize(32 * 1024);
+            socket.setReceiveBufferSize(32 * 1024);
+            socket.setTcpNoDelay(true);
+            socket.connect(inetSocketAddress);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,7 +108,7 @@ public class KeyValueClient {
     }
 
 
-    public KeyValueClient(String ip, int port) throws IOException {
+    public KeyValueClient(String ip, int port) {
         // TODO Auto-generated constructor stub
         this.setIp(ip).setPort(port).connection();
     }

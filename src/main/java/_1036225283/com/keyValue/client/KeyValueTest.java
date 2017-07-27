@@ -6,14 +6,19 @@ package _1036225283.com.keyValue.client;
  */
 public class KeyValueTest {
 
-    public static int port = 9999;
+    private static int port = 9999;
+    private static String host = "localhost";
+
+    private static KeyValueClient client = new KeyValueClient(host, port);
+
 
     public static void main(String[] args) throws Exception {
 
+        client.auth("xwsKeyValue@#$");
 //        set();
-//        get();
+        get();
 //        getTotal();
-        setOne();
+//        setOne();
 //        getOne();
 //        test();
         System.out.println("this is end");
@@ -29,7 +34,6 @@ public class KeyValueTest {
 
     public static void getTotal() throws Exception {
 
-        KeyValueClient client = new KeyValueClient("localhost", port);
         long start = System.nanoTime();
         for (int i = 0; i < 10000; i++) {
             String value = client.get("我爱你第" + i + "次啊");
@@ -43,7 +47,6 @@ public class KeyValueTest {
     // test get
     public static void get() throws Exception {
 
-        KeyValueClient client = new KeyValueClient("localhost", port);
 
         for (int i = 0; i < 1000; i++) {
             long start = System.nanoTime();
@@ -57,7 +60,6 @@ public class KeyValueTest {
 
     //test set
     public static void set() throws Exception {
-        KeyValueClient client = new KeyValueClient("localhost", port);
 
         for (int i = 0; i < 10000; i++) {
             long start = System.nanoTime();
@@ -70,7 +72,6 @@ public class KeyValueTest {
 
     public static void getOne() throws Exception {
 
-        KeyValueClient client = new KeyValueClient("localhost", port);
 
         long start = System.nanoTime();
         String value = client.get("我爱你第1次啊");
@@ -81,8 +82,7 @@ public class KeyValueTest {
 
     //test set
     public static void setOne() throws Exception {
-        KeyValueClient client = new KeyValueClient("localhost", port);
-        client.auth("xwsKeyValue@#$");
+
         long start = System.nanoTime();
         client.set("我爱你第1次啊", "你爱我1次");
         long end = System.nanoTime();
