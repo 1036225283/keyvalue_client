@@ -1,6 +1,7 @@
 package _1036225283.com.keyValue.client;
 
-import com.nitian.util.log.LogManager;
+
+import com._1036225283.util.self.log.LogManager;
 
 /**
  * log record

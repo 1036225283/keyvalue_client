@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>1036225283.com</groupId>
+    <groupId>com.1036225283</groupId>
     <artifactId>keyvalue.client</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -14,6 +14,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>http://www.1036225283.com:8090/nexus/content/repositories/releases</url>
+        </repository>
+    </distributionManagement>
+
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -24,7 +32,7 @@
 
 
         <dependency>
-            <groupId>1036225283.com</groupId>
+            <groupId>com.1036225283</groupId>
             <artifactId>util.self</artifactId>
             <version>1.0.0</version>
         </dependency>

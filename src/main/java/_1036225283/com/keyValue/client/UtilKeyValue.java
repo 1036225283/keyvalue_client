@@ -1,6 +1,7 @@
 package _1036225283.com.keyValue.client;
 
-import com.nitian.util.encrypt.UtilRSA;
+
+import com._1036225283.util.self.encrypt.UtilRSA;
 
 /**
  * key value util
