@@ -7,7 +7,7 @@ package _1036225283.com.keyValue.client;
 public class KeyValueTest {
 
     private static int port = 9999;
-    private static String host = "localhost";
+    private static String host = "www.1036225283.com";
 
     private static KeyValueClient client = new KeyValueClient(host, port);
 
@@ -15,8 +15,11 @@ public class KeyValueTest {
     public static void main(String[] args) throws Exception {
 
         client.auth("xwsKeyValue@#$");
+        client.set("xws","xws");
+        String xws = client.get("xws");
+        System.out.println(xws);
 //        set();
-        get();
+//        get();
 //        getTotal();
 //        setOne();
 //        getOne();
